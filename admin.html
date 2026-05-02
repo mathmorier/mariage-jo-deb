@@ -3,22 +3,19 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mariés - Contrôle</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Mariés - Le Jeu</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="stars-container" id="stars"></div>
-    
-    <div class="slider-container">
-        <div class="card" id="main-card">
-            <div class="level-tag" id="level">LEVEL 1</div>
-            <h2 id="title">LE PROTOCOLE C-3PO</h2>
+    <div id="stars-container"></div>
+    <div class="slider-wrapper" id="slider">
+        <div class="card" id="card">
+            <div id="lvl-tag" style="opacity:0.6; letter-spacing:2px;">LEVEL 1</div>
+            <h2 id="card-title">CHARGEMENT...</h2>
+            <div class="hint">Glissez vers la gauche ←</div>
         </div>
-        <div class="nav">
-            <button class="btn" onclick="change(-1)">PRÉCÉDENT</button>
-            <button class="btn" onclick="change(1)">SUIVANT</button>
-        </div>
+        <div class="dots" id="dots"></div>
     </div>
 
     <script>
@@ -33,32 +30,75 @@
             {l:"LEVEL 2", t:"La Cantina de Mos Eisley"},
             {l:"LEVEL 3", t:"Entraînement de Stormtrooper"},
             {l:"LEVEL 3", t:"L'Effet Cantina"},
-            {l:"LEVEL 3", t:"Chasseur de Primes Indépendant"},
+            {l:"LEVEL 3", t:"Chasseur de Primes"},
             {l:"LEVEL 3", t:"Le Droïde de Protocole"},
             {l:"LEVEL 3", t:"Le Pilote du Raid de Kessel"},
             {l:"FINAL", t:"L'ÉQUILIBRE DE LA FORCE"}
         ];
-        let cur = 0;
-        function update() {
-            document.getElementById('level').innerText = items[cur].l;
-            document.getElementById('title').innerText = items[cur].t;
-        }
-        function change(n) {
-            cur += n;
-            if(cur < 0) cur = 0;
-            if(cur >= items.length) cur = items.length - 1;
+
+        let index = 0;
+        const titleEl = document.getElementById('card-title');
+        const lvlEl = document.getElementById('lvl-tag');
+        const dotsEl = document.getElementById('dots');
+
+        function init() {
+            items.forEach((_, i) => {
+                const d = document.createElement('div');
+                d.className = 'dot';
+                dotsEl.appendChild(d);
+            });
             update();
         }
-        // Star background
-        const stars = document.getElementById('stars');
+
+        function update() {
+            titleEl.innerText = items[index].t;
+            lvlEl.innerText = items[index].l;
+            document.querySelectorAll('.dot').forEach((d, i) => {
+                d.classList.toggle('active', i === index);
+            });
+        }
+
+        // SWIPE LOGIC
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        const slider = document.getElementById('slider');
+        slider.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        slider.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchStartX - touchEndX > 50) { // Swipe Left
+                if (index < items.length - 1) {
+                    index++;
+                    update();
+                }
+            }
+            if (touchEndX - touchStartX > 50) { // Swipe Right
+                if (index > 0) {
+                    index--;
+                    update();
+                }
+            }
+        }
+
+        // Stars
+        const starsC = document.getElementById('stars-container');
         for(let i=0; i<80; i++) {
-            let s = document.createElement('div');
+            const s = document.createElement('div');
             s.className = 'star';
+            s.style.width = '1px'; s.style.height = '1px';
             s.style.left = Math.random()*100+'vw';
             s.style.top = Math.random()*100+'vh';
-            s.style.width = '1px'; s.style.height = '1px';
-            stars.appendChild(s);
+            starsC.appendChild(s);
         }
+
+        init();
     </script>
 </body>
 </html>

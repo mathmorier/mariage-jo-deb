@@ -4,21 +4,23 @@
 :root {
     --sw-yellow: #ffe81f;
     --sw-blue: #4bd5ee;
-    --bg-black: #050505;
+    --bg-black: #020205;
 }
 
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
+    width: 100%;
     background-color: var(--bg-black);
     color: white;
     font-family: 'Exo 2', sans-serif;
     overflow-x: hidden;
+    touch-action: pan-y;
 }
 
-/* Background Stars */
-.stars-container {
+/* Fond étoilé fixe */
+#stars-container {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     z-index: -1;
@@ -29,102 +31,99 @@ body, html {
     position: absolute;
     background: white;
     border-radius: 50%;
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
-/* Page Invités - Elements Flottants */
+/* Titres de sections */
+.level-title {
+    color: var(--sw-yellow);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    border-bottom: 1px solid rgba(255, 232, 31, 0.3);
+    margin: 40px 0 20px 0;
+    padding-bottom: 10px;
+    width: 100%;
+    font-weight: 700;
+}
+
+/* Page Invités */
 .floating-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    padding: 40px 20px;
-    gap: 20px;
+    padding: 20px;
+    gap: 15px;
 }
 
 .floating-item {
-    background: rgba(255, 255, 255, 0.07);
+    background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 20px;
-    border-radius: 12px;
-    width: 260px;
-    backdrop-filter: blur(8px);
-    animation: hover 6s infinite ease-in-out;
+    padding: 15px;
+    border-radius: 10px;
+    width: 40%;
+    min-width: 140px;
+    backdrop-filter: blur(5px);
+    animation: hover 5s infinite ease-in-out;
     text-align: center;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.8);
-}
-
-.floating-item h3 {
-    color: var(--sw-yellow);
-    margin: 0 0 10px 0;
-    font-size: 1.2em;
-}
-
-.floating-item p {
-    font-size: 1em;
-    margin: 0;
-    color: #ccc;
 }
 
 @keyframes hover {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(1deg); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
-/* Page Mariés - Slider Card */
-.slider-container {
+/* Page Mariés - Slider Mobile */
+.slider-wrapper {
     height: 100vh;
+    width: 100vw;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    position: relative;
 }
 
 .card {
-    width: 300px;
-    height: 400px;
-    background: linear-gradient(135deg, #111 0%, #000 100%);
-    border: 2px solid var(--sw-yellow);
-    border-radius: 15px;
+    width: 85vw;
+    max-width: 350px;
+    height: 60vh;
+    background: rgba(10, 10, 10, 0.9);
+    border: 3px solid var(--sw-yellow);
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 30px;
+    align-items: center;
+    padding: 20px;
     text-align: center;
-    box-shadow: 0 0 30px rgba(255, 232, 31, 0.3);
-    transition: all 0.4s ease;
+    box-shadow: 0 0 30px rgba(255, 232, 31, 0.4);
+    user-select: none;
 }
 
 .card h2 {
-    color: var(--sw-yellow);
     font-size: 2em;
-    text-transform: uppercase;
-    margin: 0;
-}
-
-.card .level-tag {
-    font-size: 0.8em;
-    letter-spacing: 3px;
-    opacity: 0.6;
-    margin-bottom: 20px;
-}
-
-.nav {
-    margin-top: 30px;
-    display: flex;
-    gap: 20px;
-}
-
-.btn {
-    background: none;
-    border: 1px solid var(--sw-yellow);
     color: var(--sw-yellow);
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
+    margin: 10px 0;
 }
 
-.btn:active {
+.hint {
+    color: var(--sw-blue);
+    font-size: 0.9em;
+    margin-top: 20px;
+    opacity: 0.8;
+}
+
+.dots {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px; height: 8px; background: #555; border-radius: 50%;
+}
+
+.dot.active {
     background: var(--sw-yellow);
-    color: black;
 }
