@@ -1,129 +1,50 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;700&display=swap');
 
 :root {
     --sw-yellow: #ffe81f;
-    --sw-blue: #4bd5ee;
     --bg-black: #020205;
 }
 
 body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: 100%;
+    margin: 0; padding: 0; height: 100%; width: 100%;
     background-color: var(--bg-black);
-    color: white;
-    font-family: 'Exo 2', sans-serif;
-    overflow-x: hidden;
-    touch-action: pan-y;
+    color: white; font-family: 'Exo 2', sans-serif;
 }
 
-/* Fond étoilé fixe */
 #stars-container {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: -1;
-    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0; background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
 }
 
-.star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    opacity: 0.6;
-}
+.star { position: absolute; background: white; border-radius: 50%; opacity: 0.6; }
 
-/* Titres de sections */
 .level-title {
-    color: var(--sw-yellow);
-    text-transform: uppercase;
-    letter-spacing: 3px;
+    color: var(--sw-yellow); text-transform: uppercase; letter-spacing: 2px;
     border-bottom: 1px solid rgba(255, 232, 31, 0.3);
-    margin: 40px 0 20px 0;
-    padding-bottom: 10px;
-    width: 100%;
-    font-weight: 700;
+    margin: 40px 0 20px 0; padding-bottom: 10px; font-weight: 700; text-align: center;
 }
 
-/* Page Invités */
-.floating-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 20px;
-    gap: 15px;
-}
+.floating-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
 
 .floating-item {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 15px;
-    border-radius: 10px;
-    width: 40%;
-    min-width: 140px;
-    backdrop-filter: blur(5px);
-    animation: hover 5s infinite ease-in-out;
-    text-align: center;
+    background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 15px; border-radius: 10px; width: 42%; min-width: 140px;
+    text-align: center; animation: hover 5s infinite ease-in-out;
 }
 
-@keyframes hover {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
+.floating-item h3 { font-size: 0.9em; color: var(--sw-yellow); margin: 0 0 5px 0; }
+.floating-item p { font-size: 0.8em; margin: 0; opacity: 0.9; }
 
-/* Page Mariés - Slider Mobile */
-.slider-wrapper {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-}
+@keyframes hover { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
+/* Styles Slider Admin */
+.slider-wrapper { height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; z-index: 10; }
 .card {
-    width: 85vw;
-    max-width: 350px;
-    height: 60vh;
-    background: rgba(10, 10, 10, 0.9);
-    border: 3px solid var(--sw-yellow);
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 0 30px rgba(255, 232, 31, 0.4);
-    user-select: none;
+    width: 80vw; max-width: 350px; height: 50vh; background: rgba(0,0,0,0.9);
+    border: 3px solid var(--sw-yellow); border-radius: 20px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    padding: 30px; text-align: center; box-shadow: 0 0 30px rgba(255, 232, 31, 0.3);
 }
-
-.card h2 {
-    font-size: 2em;
-    color: var(--sw-yellow);
-    margin: 10px 0;
-}
-
-.hint {
-    color: var(--sw-blue);
-    font-size: 0.9em;
-    margin-top: 20px;
-    opacity: 0.8;
-}
-
-.dots {
-    position: absolute;
-    bottom: 30px;
-    display: flex;
-    gap: 8px;
-}
-
-.dot {
-    width: 8px; height: 8px; background: #555; border-radius: 50%;
-}
-
-.dot.active {
-    background: var(--sw-yellow);
-}
+.dots { position: absolute; bottom: 50px; display: flex; gap: 8px; }
+.dot { width: 8px; height: 8px; background: #444; border-radius: 50%; }
+.dot.active { background: var(--sw-yellow); }
