@@ -1,41 +1,64 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maître Jedi - Solutions</title>
+    <title>Mariés - Contrôle</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="admin-page">
-    <div class="container">
-        <h1>CONTRÔLE DE LA MISSION</h1>
-        
-        <div class="solution-card">
-            <h3>LEVEL 1</h3>
-            <p><strong>Le Protocole C-3PO :</strong> Cravates & Nœuds papillon[cite: 1]</p>
-            <p><strong>Le Viseur de Vador :</strong> Porteurs de lunettes[cite: 1]</p>
-            <p><strong>Alignement des Planètes :</strong> Nés en Octobre ou Décembre[cite: 1]</p>
-            <p><strong>L'Armée de Clones :</strong> Plus de 2 enfants[cite: 1]</p>
+<body>
+    <div class="stars-container" id="stars"></div>
+    
+    <div class="slider-container">
+        <div class="card" id="main-card">
+            <div class="level-tag" id="level">LEVEL 1</div>
+            <h2 id="title">LE PROTOCOLE C-3PO</h2>
         </div>
-
-        <div class="solution-card">
-            <h3>LEVEL 2</h3>
-            <p><strong>Bordure Extérieure :</strong> Partis en voyage avec vous[cite: 1]</p>
-            <p><strong>L'Académie Jedi :</strong> Amis d'école du marié[cite: 1]</p>
-            <p><strong>Le Clan Skywalker :</strong> La Famille[cite: 1]</p>
-            <p><strong>La Cantina :</strong> Ceux de l'EVJF/EVG[cite: 1]</p>
+        <div class="nav">
+            <button class="btn" onclick="change(-1)">PRÉCÉDENT</button>
+            <button class="btn" onclick="change(1)">SUIVANT</button>
         </div>
-
-        <div class="solution-card">
-            <h3>LEVEL 3</h3>
-            <p><strong>Stormtrooper :</strong> Sportifs de fitness[cite: 1]</p>
-            <p><strong>L'Effet Cantina :</strong> Ceux qui ont vu le marié "trop fêter"[cite: 1]</p>
-            <p><strong>Chasseur de Primes :</strong> Les célibataires[cite: 1]</p>
-            <p><strong>Droïde de Protocole :</strong> +10 ans dans la même boîte[cite: 1]</p>
-            <p><strong>Raid de Kessel :</strong> PV pour excès de vitesse[cite: 1]</p>
-        </div>
-        
-        <a href="index.html" style="color: #ffe81f;">Retour à la page invités</a>
     </div>
+
+    <script>
+        const items = [
+            {l:"LEVEL 1", t:"Le Protocole C-3PO"},
+            {l:"LEVEL 1", t:"Le Viseur de Vador"},
+            {l:"LEVEL 1", t:"Alignement des Planètes"},
+            {l:"LEVEL 1", t:"L'Armée de Clones"},
+            {l:"LEVEL 2", t:"Bordure Extérieure"},
+            {l:"LEVEL 2", t:"L'Académie Jedi"},
+            {l:"LEVEL 2", t:"Le Clan Skywalker"},
+            {l:"LEVEL 2", t:"La Cantina de Mos Eisley"},
+            {l:"LEVEL 3", t:"Entraînement de Stormtrooper"},
+            {l:"LEVEL 3", t:"L'Effet Cantina"},
+            {l:"LEVEL 3", t:"Chasseur de Primes Indépendant"},
+            {l:"LEVEL 3", t:"Le Droïde de Protocole"},
+            {l:"LEVEL 3", t:"Le Pilote du Raid de Kessel"},
+            {l:"FINAL", t:"L'ÉQUILIBRE DE LA FORCE"}
+        ];
+        let cur = 0;
+        function update() {
+            document.getElementById('level').innerText = items[cur].l;
+            document.getElementById('title').innerText = items[cur].t;
+        }
+        function change(n) {
+            cur += n;
+            if(cur < 0) cur = 0;
+            if(cur >= items.length) cur = items.length - 1;
+            update();
+        }
+        // Star background
+        const stars = document.getElementById('stars');
+        for(let i=0; i<80; i++) {
+            let s = document.createElement('div');
+            s.className = 'star';
+            s.style.left = Math.random()*100+'vw';
+            s.style.top = Math.random()*100+'vh';
+            s.style.width = '1px'; s.style.height = '1px';
+            stars.appendChild(s);
+        }
+    </script>
 </body>
 </html>
